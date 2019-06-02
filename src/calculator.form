@@ -22,6 +22,8 @@
           </grid>
         </constraints>
         <properties>
+          <editable value="false"/>
+          <enabled value="true"/>
           <font name="Arial" size="26" style="1"/>
           <text value=""/>
         </properties>
@@ -35,6 +37,7 @@
           </grid>
         </constraints>
         <properties>
+          <editable value="false"/>
           <font name="Arial" size="26" style="1"/>
           <text value=""/>
         </properties>
@@ -79,7 +82,7 @@
           <text value="7"/>
         </properties>
       </component>
-      <component id="abc8f" class="javax.swing.JButton" binding="leftbracket">
+      <component id="abc8f" class="javax.swing.JButton" binding="leftBracket">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <minimum-size width="-1" height="95"/>
@@ -152,7 +155,7 @@
           <text value="2"/>
         </properties>
       </component>
-      <component id="f506" class="javax.swing.JButton" binding="rightbracket">
+      <component id="f506" class="javax.swing.JButton" binding="rightBracket">
         <constraints>
           <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
             <minimum-size width="-1" height="95"/>
