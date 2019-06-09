@@ -76,12 +76,23 @@ public class calculator {
 
             }
         };
+        Action ce_cal = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                results.setText("");
+                onp.setText("");
+
+            }
+        };
+
         ONPButton.addActionListener(onp_cal);
         equals.addActionListener(equals_cal);
         ONPButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,0, false),"enter");
         ONPButton.getActionMap().put("enter", onp_cal);
         ONPButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,0, true),"rEnter");
         ONPButton.getActionMap().put("rEnter", equals_cal);
+        ONPButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE,0, true),"backspace");
+        ONPButton.getActionMap().put("backspace", ce_cal);
 
         CEButton.addActionListener(new ActionListener() {
             @Override

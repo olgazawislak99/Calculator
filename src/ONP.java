@@ -90,14 +90,14 @@ public class ONP
     }
 
 
-    public double oblicz(String wejscie)
+    double oblicz(String wejscie)
     {
         wejscie = onp+" =";
         Stack<Double> stos = new Stack<Double>();//przechowuje wyniki pośrednie
         double a=0;//przechowuje dane ze stosu
         double b=0;//przechowuje dane ze stosu
         double w=0;//wynik operacji arytmetycznej
-        String buduj="";
+        StringBuilder buduj= new StringBuilder();
         String spacja=" ";
         char sp=' ';
         int licznik=0;
@@ -113,19 +113,14 @@ public class ONP
                     else if(czar=='-'){w=a-b;}
                     else if(czar=='*'){w=a*b;}
                     else if(czar=='/'){w=a/b;}
-                    else if(czar=='^')
-                    {
-                        if(b==0)
-                        { w=1;
-                        } else {
-                            w=a;
-                            int licz=1;
-                            while(licz<(int)b)
-                            {
-                                w*=w;
-                                licz++;
-                            }
-
+                    else if (b == 0) {
+                        w = 1;
+                    } else {
+                        w = a;
+                        int licz = 1;
+                        while (licz < (int) b) {
+                            w *= w;
+                            licz++;
                         }
 
                     }
@@ -135,10 +130,10 @@ public class ONP
             }
             else if(czar == sp)//Krok 3: Umieść el na stosie
             {
-                if(buduj.compareTo("")!=0){
-                    double tmp = Double.parseDouble(buduj);
+                if(buduj.toString().compareTo("")!=0){
+                    double tmp = Double.parseDouble(buduj.toString());
                     stos.push(tmp);
-                    buduj="";
+                    buduj = new StringBuilder();
                 }
             }
             else if(czar=='=')//Krok 5: Jeśli el jest znakiem '=', to idź do kroku 10
@@ -150,7 +145,7 @@ public class ONP
             }
             else if(czar>='0' && czar <='9')//buduj liczbe
             {
-                buduj+=czar;
+                buduj.append(czar);
             }
             licznik++;
 
