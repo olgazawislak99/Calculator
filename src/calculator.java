@@ -70,9 +70,16 @@ public class calculator {
                 String tekst = results.getText();
                 ONP o = new ONP(tekst);
                 String wyrazenie = o.toString();
-                double wynik = o.oblicz(wyrazenie);
-                String wynik2 = valueOf(wynik);
-                onp.setText(wynik2);
+                try {
+                    double wynik = o.oblicz(wyrazenie);
+                    String wynik2 = valueOf(wynik);
+                    onp.setText(wynik2);
+                }
+                catch (ArithmeticException ae){
+                    results.setText("ERROR");
+                }
+
+
 
             }
         };
@@ -110,6 +117,7 @@ public class calculator {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
     }
 
 

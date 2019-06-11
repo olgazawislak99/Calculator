@@ -90,66 +90,62 @@ public class ONP
     }
 
 
-    double oblicz(String wejscie)
-    {
-        wejscie = onp+" =";
+    double oblicz(String wejscie) throws ArithmeticException {
+        wejscie = onp + " =";
         Stack<Double> stos = new Stack<Double>();//przechowuje wyniki pośrednie
-        double a=0;//przechowuje dane ze stosu
-        double b=0;//przechowuje dane ze stosu
-        double w=0;//wynik operacji arytmetycznej
-        StringBuilder buduj= new StringBuilder();
-        String spacja=" ";
-        char sp=' ';
-        int licznik=0;
+        double a = 0;//przechowuje dane ze stosu
+        double b = 0;//przechowuje dane ze stosu
+        double w = 0;//wynik operacji arytmetycznej
+        StringBuilder buduj = new StringBuilder();
+        char sp = ' ';
+        int licznik = 0;
+            do {
+                char czar = wejscie.charAt(licznik);
+                if (czar == '+' || czar == '-' || czar == '*' || czar == '/' || czar == '^') {
+                    if (!stos.empty()) {
+                        b = stos.pop();
+                        a = stos.pop();
+                        if (czar == '+') {
+                            w = a + b;
+                        } else if (czar == '-') {
+                            w = a - b;
+                        } else if (czar == '*') {
+                            w = a * b;
+                        } else if (czar == '/') {
+                            w = a / b;
+                            if (b == 0) throw new ArithmeticException();
+                        } else if (b == 0) {
+                            w = 1;
+                        } else {
+                            w = a;
+                            int licz = 1;
+                            while (licz < (int) b) {
+                                w *= w;
+                                licz++;
+                            }
 
-        do{
-            char czar=wejscie.charAt(licznik);
-            if(czar=='+' || czar == '-' || czar == '*' || czar == '/' || czar == '^')//Krok 2: Jeśli el nie jest liczbą, to idź do kroku 5
-            {
-                if(!stos.empty()){
-                    b=stos.pop();//Krok 6: Pobierz ze stosu dwie liczby a i b
-                    a=stos.pop();
-                    if(czar=='+'){w=a+b;}//Krok 7: Wykonaj nad liczbami a i b operację określoną przez el i umieść wynik w w
-                    else if(czar=='-'){w=a-b;}
-                    else if(czar=='*'){w=a*b;}
-                    else if(czar=='/'){w=a/b;}
-                    else if (b == 0) {
-                        w = 1;
-                    } else {
-                        w = a;
-                        int licz = 1;
-                        while (licz < (int) b) {
-                            w *= w;
-                            licz++;
                         }
 
+                        stos.push(w);
                     }
+                } else if (czar == sp) {
+                    if (buduj.toString().compareTo("") != 0) {
+                        double tmp = Double.parseDouble(buduj.toString());
+                        stos.push(tmp);
+                        buduj = new StringBuilder();
+                    }
+                } else if (czar == '=') {
+                    if (!stos.empty()) {
+                        w = stos.pop();
+                        break;
+                    }
+                } else if (czar >= '0' && czar <= '9') {
+                    buduj.append(czar);
+                }
+                licznik++;
 
-                    stos.push(w);//Krok 8: Umieść w na stosie
-                }
-            }
-            else if(czar == sp)//Krok 3: Umieść el na stosie
-            {
-                if(buduj.toString().compareTo("")!=0){
-                    double tmp = Double.parseDouble(buduj.toString());
-                    stos.push(tmp);
-                    buduj = new StringBuilder();
-                }
-            }
-            else if(czar=='=')//Krok 5: Jeśli el jest znakiem '=', to idź do kroku 10
-            {
-                if(!stos.empty()){
-                    w=stos.pop();//Krok 10: Prześlij na wyjście zawartość wierzchołka stosu
-                    break;
-                }
-            }
-            else if(czar>='0' && czar <='9')//buduj liczbe
-            {
-                buduj.append(czar);
-            }
-            licznik++;
+            } while (licznik < wejscie.length());
 
-        }while(licznik<wejscie.length());//Krok 4: Idź do kroku 1\
 
         return w;
     }
